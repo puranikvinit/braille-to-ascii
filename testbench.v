@@ -2,16 +2,17 @@
 //OM JAI DURGE MAA
 
 `timescale 1ns/1ns
-`include "braille_to_decimal.v"
+`include "braille_to_ascii.v"
 
-module brailleToBinaryTb();
+module brailleToAsciiTb();
     reg CLK;
     reg R;
     reg I;
 
-    wire [8:1] Y;
+    wire [7:0] Y;
+    wire INV;
 
-    brailleToAscii BTA (I,CLK,R,Y);
+    brailleToAscii BTA (I,CLK,R,Y,INV);
 
     initial
     begin
@@ -26,26 +27,28 @@ module brailleToBinaryTb();
     begin
         CLK = 1;
 
-        R = 0; I = 0; #10;
+        R = 0; I = 1; #10;
 
-        R = 1;
-        I = 0; #10;
-        I = 0; #10;
-        I = 0; #10;
-        I = 1; #10;
-        I = 1; #10;
-        I = 1; #10;
-        I = 0; #10;
-        I = 0; #10;
-        I = 1; #10;
-        I = 1; #10;
-        I = 0; #10;
-        I = 1; #10;
+        //Input Stream for 9 (57)
+        R = 1; I = 0; #10;
+        R = 1; I = 1; #10;
+        R = 1; I = 0; #10;
+        R = 1; I = 1; #10;
+        R = 1; I = 0; #10;
+        R = 1; I = 0; #10;
+
+        //Input Stream for INV = 1
+        R = 1; I = 1; #10;
+        R = 1; I = 0; #10;
+        R = 1; I = 1; #10;
+        R = 1; I = 1; #10;
+        R = 1; I = 1; #10;
+        R = 1; I = 0; #10;
     end
 
     initial
     begin
         $display("Test Completed!!");
-        #300 $finish;
+        #150 $finish;
     end
 endmodule
