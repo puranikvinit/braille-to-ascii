@@ -29,9 +29,9 @@ module brailleToAsciiTb();
 
         R = 0; I = 1; #10;
 
-        //Input Stream for 9 (57)
-        R = 1; I = 0; #10;
+        //Input Stream for 3 (51)
         R = 1; I = 1; #10;
+        R = 1; I = 0; #10;
         R = 1; I = 0; #10;
         R = 1; I = 1; #10;
         R = 1; I = 0; #10;
